@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru" class="htmlDada">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ToDoList</title>
+
+   <link rel="stylesheet" href="/css/style.css">
+   <script src="https://kit.fontawesome.com/56895e0c9b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+   <!-- -----------------------HEADER-------------------------- -->
+   <header>
+      <div class="left_logo_search_header_block">
+         <a href="#">
+            <span class="logo_first_part">my</span>
+            <h1 class="logo_second_part">Todo</h1>
+         </a>
+
+      </div>
+      <div class="center_nav_header_block">
+         <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Notes</a></li>
+            <li><a href="#">Task list</a></li>
+            <li><a href="#">About Us</a></li>
+
+         </ul>
+
+      </div>
+      <div class="search-box">
+         <input type="text" placeholder="Search">
+         <button type="submit"><i class="fa fa-search"></i></button>
+         <select class="themeSelector">
+            <!-- <option>Light</option>
+            <option>Dark</option>
+            <option>Primary</option>
+            <option>Blue</option> -->
+         </select>
+      </div>
+   </header>
+
+   <main>
+      <div class="container">
+         <!-- -------------------------Create Note------------------------ -->
+         <form id="formNoteCreate">
+            <div class="fieldsCard">
+               <div>
+                  <input class="titleInput" placeholder="Enter note title" required>
+               </div>
+
+               <div>
+                  <textarea class="descriptionInput" placeholder="Enter a note description" rows="5"
+                     required></textarea>
+               </div>
+
+               <div>
+                  <button class="addBtn" type="submit">Create note</button>
+                  <select id="categorySelect">
+                  </select>
+               </div>
+            </div>
+         </form>
+
+         <!-- ----------------Create category -->
+         <form id="formCategoryCreate">
+            <div class="fieldsCard">
+               <div>
+                  <input class="titleInput" id="titleCategoryInput" placeholder="Enter note title" required>
+               </div>
+
+               <div>
+                  <button class="addBtn" id="categoryAddBtn" type="submit">Create category</button>
+               </div>
+            </div>
+         </form>
+
+
+      </div>
+      <label for="category-filter">Filter by category:</label>
+      <select id="category-filter">
+         <option value="all">All categories</option>
+
+      </select>
+      <div class="todos">
+
+
+
+
+
+      </div>
+      </div>
+   </main>
+
+
+   <!-- -------Модальное окно----------- -->
+   <div id="myModal" class="modal">
+      <div class="modal-content">
+         <span class="closeModal">&times;</span>
+         <h2>Edit Category</h2>
+         <form class="formCategoryCRUD">
+            <div class="form-group">
+               <label for="category">Category name:</label>
+               <input type="text" id="editCategoryInput" name="category" required>
+            </div>
+            <div class="form-group">
+               <button type="submit" id="submitCategoryBtn">Submit</button>
+               <button type="button" id="deleteCategoryBtn">Delete</button>
+            </div>
+         </form>
+      </div>
+   </div>
+
+
+
+   <script src="/script/source.js"></script>
+   <script src="/script/themeChanger.js"></script>
+   <script src="/script/categoryCRAD.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <main>
+      <div class="container">
+         <div class="fieldsCard">
+            <div class="formInput">
+               <input class="titleInput" placeholder="Введите заголовок">
+            </div>
+            <div class="">
+               <textarea class="description"></textarea>
+            </div>
+         </div>
+
+         <div class="toDos">
+
+         </div>
+      </div>
+   </main> -->

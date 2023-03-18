@@ -1,0 +1,505 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+* {
+   margin: 0;
+   padding: 0;
+}
+
+:root {
+   /* light theme */
+   --bg: #f5f5f5;
+   --ct1: #333;
+   --ct2: #666;
+   --primary: #00BFFF;
+   --secondary: #7F00FF;
+
+   /* dark theme */
+   --bg-dark: #222;
+   --ct1-dark: #ddd;
+   --ct2-dark: #999;
+   --primary-dark: #7F00FF;
+   --secondary-dark: #00BFFF;
+
+   /* primary theme */
+   --bg-primary: #10002B;
+   --ct1-primary: #fff;
+   --ct2-primary: #ddd;
+   --primary-primary: #ff00ff;
+   --secondary-primary: #00ffbf;
+}
+
+/* light theme */
+body.light {
+   --bg: #f5f5f5;
+   --ct1: #333;
+   --ct2: #666;
+   --primary: #7F00FF;
+   --secondary: #00BFFF;
+   background: var(--bg);
+}
+
+/* dark theme */
+body.dark {
+   --bg: var(--bg-dark);
+   --ct1: var(--ct1-dark);
+   --ct2: var(--ct2-dark);
+   --primary: var(--primary-dark);
+   --secondary: var(--secondary-dark);
+   background: var(--bg);
+}
+
+/* primary theme */
+body.primary {
+   --bg: var(--bg-primary);
+   --ct1: var(--ct1-primary);
+   --ct2: var(--ct2-primary);
+   --primary: var(--primary-primary);
+   --secondary: var(--secondary-primary);
+   background: var(--bg);
+}
+
+.hidden {
+   display: none;
+}
+
+body {
+   width: 100%;
+   font-family: 'Plus Jakarta Sans', sans-serif;
+   color: var(--ct1);
+   background: linear-gradient(135deg, var(--primary), var(--secondary), #aaaaaa, #EE82EE, #FFA07A, var(--ct2));
+   background-size: 400% 400%;
+   animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+   0% {
+      background-position: 0% 50%;
+   }
+
+   50% {
+      background-position: 100% 50%;
+   }
+
+   100% {
+      background-position: 0% 50%;
+   }
+}
+
+
+ul {
+   list-style: none;
+}
+
+a {
+   text-decoration: none;
+   color: var(--ct1)
+}
+
+::-webkit-scrollbar {
+   width: 6px;
+   background-color: transparent;
+}
+
+/* Активируем скроллбар при наведении на блок */
+::-webkit-scrollbar-thumb:hover {
+   background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Анимация плавного появления скроллбара при наведении на блок */
+::-webkit-scrollbar-thumb {
+   background-color: rgba(0, 0, 0, 0);
+   transition: all 0.2s ease-out;
+}
+
+select {
+   background-color: #f0f0f0;
+   border-radius: 10px;
+   border: none;
+   font-size: 13px;
+   height: 30px;
+   margin-left: 10px;
+   padding: 5px 13px;
+   width: 160px;
+}
+
+option {
+   background-color: #fff;
+   border-radius: 10px;
+   border: none;
+   color: #333;
+   font-size: 13px;
+   padding: 5px 13px;
+}
+
+option:hover {
+   background-color: #e8e8e8;
+   cursor: pointer;
+}
+
+
+/* ------------------------header--------------- */
+
+header {
+   height: 62px;
+   display: flex;
+   justify-content: space-between;
+   padding: 0 80px;
+}
+
+.left_logo_search_header_block {
+   display: flex;
+   align-items: center;
+}
+
+.left_logo_search_header_block a {
+   font-weight: 700;
+   font-size: 19px;
+   line-height: 34px;
+   display: flex;
+   align-items: center;
+   letter-spacing: 0.5px;
+   color: var(--primary);
+}
+
+.left_logo_search_header_block a span {
+   color: var(--secondary);
+   font-size: 28px;
+   animation: bounce 0.3s ease-in-out 5s;
+}
+
+.left_logo_search_header_block a span:hover {
+   cursor: default;
+}
+
+@keyframes bounce {
+   0% {
+      transform: translateY(0);
+   }
+
+   50% {
+      transform: translateY(-5px);
+   }
+
+   100% {
+      transform: translateY(0);
+   }
+}
+
+.center_nav_header_block {
+   height: 100%;
+}
+
+.center_nav_header_block ul {
+   display: flex;
+   height: 100%;
+   align-items: center;
+}
+
+.center_nav_header_block li a {
+   padding: 0 20px;
+   font-size: 14px;
+   color: var(--ct1);
+}
+
+.search-box {
+   display: flex;
+   align-items: center;
+}
+
+.search-box input {
+   padding: 10px;
+   border: none;
+   border-radius: 5px;
+   margin-right: 10px;
+}
+
+.search-box button {
+   background-color: #fff;
+   border: none;
+   border-radius: 5px;
+   padding: 10px;
+}
+
+
+/* -------_------Модальное окно-------_------------ */
+
+.modal {
+   display: none;
+   position: fixed;
+   z-index: 9999;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.modal-content {
+   background-color: #fefefe;
+   margin: 10% auto;
+   padding: 20px;
+   border: 1px solid #888;
+   width: 40%;
+   max-width: 500px;
+   animation-name: openCategoryCRUDModal;
+   transition: 0.9s;
+   border-radius: 10px;
+}
+
+.modal-content form div {
+   display: flex;
+}
+
+.modal-content h2 {
+   margin-bottom: 25px;
+}
+
+@keyframes openCategoryCRUDModal {
+   from {
+      opacity: 0;
+      transform: scale(.5);
+   }
+
+   to {
+      opacity: 1;
+      transform: scale(1);
+   }
+}
+
+#editCategoryInput {
+   width: 72%;
+   height: 20px;
+   margin: 0 4px;
+}
+
+.closeModal {
+   color: #aaaaaa;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+   transition: 0.3s;
+}
+
+.closeModal:hover,
+.closeModal:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.form-group {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 20px;
+}
+
+#submitCategoryBtn,
+#deleteCategoryBtn {
+   background-color: var(--primary);
+   color: #fff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease-in-out;
+}
+
+#submitCategoryBtn:hover,
+#deleteCategoryBtn:hover {
+   background-color: #fff;
+   color: var(--primary);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+   transform: translateY(-2px);
+   cursor: pointer;
+}
+
+/* -----------------------Основной блок------------------------- */
+
+label[for="category-filter"] {
+   color: #333;
+   font-size: 14px;
+   font-weight: bold;
+   margin-left: 10px;
+}
+
+/* ---------Блок где мы создаём замеку------- */
+.container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 300px;
+   width: 100%;
+}
+
+.fieldsCard {
+   padding: 19px;
+   border: 1px solid var(--ct2);
+   border-radius: 12px;
+   margin: 65px 20px;
+   background-color: rgba(255, 255, 255, 0.8);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+main .container .fieldsCard input {
+   height: 30px;
+   border: 1px solid var(--ct2);
+   border-radius: 4px;
+}
+
+main .container .fieldsCard input:focus {
+   outline: none;
+   border-color: var(--primary);
+}
+
+main .container .fieldsCard input,
+textarea {
+   margin-bottom: 10px;
+   width: 100%;
+   border: 1px solid var(--ct2);
+   border-radius: 4px;
+}
+
+main .container .fieldsCard textarea:focus {
+   outline: none;
+   border-color: var(--primary);
+}
+
+
+.addBtn {
+   background-color: var(--primary);
+   color: #fff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease-in-out;
+}
+
+.addBtn:hover {
+   background-color: #fff;
+   color: var(--primary);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+   transform: translateY(-2px);
+   cursor: pointer;
+}
+
+/* --------------Карточки-------------- */
+
+.todos {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   position: relative;
+   margin-top: 20px;
+}
+
+.todoCard {
+   overflow: auto;
+   width: 310px;
+   height: 210px;
+
+   border: 1px solid var(--ct2);
+   padding: .7rem;
+   border-radius: 12px;
+   text-align: left;
+   margin: 0 10px;
+   margin-bottom: 10px;
+   background-color: #fff;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.todoTitle {
+   margin: 0;
+   font-size: 1.2rem;
+   font-weight: bold;
+   color: var(--ct1);
+}
+
+.titleTodoCard {
+   display: flex;
+   justify-content: space-between;
+}
+
+.titleTodoCard span {
+   font-size: 0.55rem;
+   color: var(--ct2);
+   /* width: 45%; */
+}
+
+.todoCard p {
+   margin: 10px 0 0;
+   font-size: 0.9rem;
+   color: var(--ct1);
+}
+
+.todoCheckbox {
+   margin-right: 5px;
+}
+
+.completed {
+   text-decoration: line-through;
+   /* зачеркивание текста /
+   opacity: 0.5;
+   / понижаем немного прозрачность, чтобы отличать выполненные заметки */
+}
+
+.timeBlock {
+   display: flex;
+   flex-direction: column;
+   width: 39%;
+}
+
+.category {
+   font-weight: bold;
+   cursor: pointer;
+}
+
+/* --------------Форма-------------- */
+
+.formCard {
+   width: 20%;
+   padding: 20px;
+   border: 1px solid var(--ct2);
+   border-radius: 12px;
+   margin: 65px auto;
+   display: flex;
+   flex-direction: column;
+   background-color: rgba(255, 255, 255, 0.8);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.formCard input {
+   height: 30px;
+   border: 1px solid var(--ct2);
+   border-radius: 4px;
+}
+
+.formCard input:focus {
+   outline: none;
+   border-color: var(--primary);
+}
+
+.formCard input,
+textarea {
+   margin-bottom: 10px;
+   width: 100%;
+   border: 1px solid var(--ct2);
+   border-radius: 4px;
+
+}
+
+.formCard textarea:focus {
+   outline: none;
+   border-color: var(--primary);
+}
+
+.addBtn {
+   background-color: var(--primary);
+}
+
+/* .editBtn {
+   width: 50px;
+   height: 40px;
+} */
