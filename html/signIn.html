@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login an account</title>
+
+   <link rel="stylesheet" href="../css/auth.css">
+   <script src="https://kit.fontawesome.com/56895e0c9b.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+   <!-- --------------------------===>HEADER<===-------------------------- -->
+
+   <header>
+      <div class="left_logo_search_header_block">
+         <a href="#">
+            <span class="logo_first_part">my</span>
+            <h1 class="logo_second_part">Todo</h1>
+         </a>
+
+      </div>
+      <div class="center_nav_header_block">
+         <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Notes</a></li>
+            <li><a href="#">Task list</a></li>
+            <li><a href="#">About Us</a></li>
+
+         </ul>
+
+      </div>
+      <div class="search-box">
+         <input type="text" placeholder="Search">
+         <button type="submit"><i class="fa fa-search"></i></button>
+         <select class="themeSelector">
+         </select>
+      </div>
+   </header>
+
+   <!-- -------------------------Redister form------------------------ -->
+   <div class="container">
+      <div class="quoteBlock">
+         <blockquote>
+            The more you plan your time, <br> the more time you'll have to plan.
+         </blockquote>
+         <cite>Jean-Louis Gasse</cite>
+      </div>
+      <form id="signIn_formAccRegister">
+         <div class="fieldsCard">
+            <h1>Sign In</h1>
+            <div>
+               <label for="emailInput">Email</label>
+               <input type="email" class="signIn_emailInput" placeholder="Enter your email" required>
+            </div>
+
+            <div>
+               <label for="passwordInput">Password</label>
+               <input type="password" class="signIn_passwordInput" placeholder="Enter your password" required>
+            </div>
+
+            <div>
+               <button class="signIn_registerButton" type="submit">Login</button>
+               <p class="auth-info">
+                  Don't have an account?
+                  <a href="../html/signUp.html" class="auth-link">Sign up</a>
+               </p>
+            </div>
+
+         </div>
+      </form>
+   </div>
+
+   <script src="/script/authIn.js"></script>
+</body>
+
+</html>

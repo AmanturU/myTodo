@@ -131,11 +131,45 @@ option {
    padding: 5px 13px;
 }
 
-option:hover {
+option,
+input:hover {
    background-color: #e8e8e8;
+   cursor: pointer;
+
+}
+
+
+button {
+   transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+   transform: translateY(-2px);
+}
+
+.signOutBtn {
+   background-color: var(--primary);
+   color: #000000;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease-in-out;
+
+   margin: 8px;
+}
+
+.signOutBtn:hover {
+   background-color: #fff;
+   color: var(--primary-primary);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+   transform: translateY(-2px);
    cursor: pointer;
 }
 
+.signOutBtn i {
+   margin-right: 5px;
+}
 
 /* ------------------------header--------------- */
 
@@ -498,8 +532,3 @@ textarea {
 .addBtn {
    background-color: var(--primary);
 }
-
-/* .editBtn {
-   width: 50px;
-   height: 40px;
-} */

@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+* {
+   margin: 0;
+   padding: 0;
+}
+
+
+:root {
+   /* light theme */
+   --bg: #f5f5f5;
+   --ct1: #333;
+   --ct2: #666;
+   --primary: #00BFFF;
+   --secondary: #7F00FF;
+
+   /* dark theme */
+   --bg-dark: #222;
+   --ct1-dark: #ddd;
+   --ct2-dark: #999;
+   --primary-dark: #7F00FF;
+   --secondary-dark: #00BFFF;
+
+   /* primary theme */
+   --bg-primary: #10002B;
+   --ct1-primary: #fff;
+   --ct2-primary: #ddd;
+   --primary-primary: #ff00ff;
+   --secondary-primary: #00ffbf;
+}
+
+/* light theme */
+body.light {
+   --bg: #f5f5f5;
+   --ct1: #333;
+   --ct2: #666;
+   --primary: #7F00FF;
+   --secondary: #00BFFF;
+   background: var(--bg);
+}
+
+/* dark theme */
+body.dark {
+   --bg: var(--bg-dark);
+   --ct1: var(--ct1-dark);
+   --ct2: var(--ct2-dark);
+   --primary: var(--primary-dark);
+   --secondary: var(--secondary-dark);
+   background: var(--bg);
+}
+
+/* primary theme */
+body.primary {
+   --bg: var(--bg-primary);
+   --ct1: var(--ct1-primary);
+   --ct2: var(--ct2-primary);
+   --primary: var(--primary-primary);
+   --secondary: var(--secondary-primary);
+   background: var(--bg);
+}
+
+.hidden {
+   display: none;
+}
+
+body {
+   width: 100%;
+   height: 100%;
+
+   font-family: 'Plus Jakarta Sans', sans-serif;
+   color: var(--ct1);
+   background: linear-gradient(135deg, var(--primary), var(--secondary), #aaaaaa, #EE82EE, #FFA07A, var(--ct2)) no-repeat;
+   background-size: 400% 400%;
+   animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+   0% {
+      background-position: 0% 50%;
+   }
+
+   50% {
+      background-position: 100% 50%;
+   }
+
+   100% {
+      background-position: 0% 50%;
+   }
+}
+
+
+ul {
+   list-style: none;
+}
+
+a {
+   text-decoration: none;
+   color: var(--ct1)
+}
+
+::-webkit-scrollbar {
+   width: 6px;
+   background-color: transparent;
+}
+
+/* Активируем скроллбар при наведении на блок */
+::-webkit-scrollbar-thumb:hover {
+   background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Анимация плавного появления скроллбара при наведении на блок */
+::-webkit-scrollbar-thumb {
+   background-color: rgba(0, 0, 0, 0);
+   transition: all 0.2s ease-out;
+}
+
+select {
+   background-color: #f0f0f0;
+   border-radius: 10px;
+   border: none;
+   font-size: 13px;
+   height: 30px;
+   margin-left: 10px;
+   padding: 5px 13px;
+   width: 160px;
+}
+
+option {
+   background-color: #fff;
+   border-radius: 10px;
+   border: none;
+   color: #333;
+   font-size: 13px;
+   padding: 5px 13px;
+}
+
+option:hover {
+   background-color: #e8e8e8;
+   cursor: pointer;
+}
+
+button:disabled {
+   background-color: #ccc;
+   cursor: not-allowed;
+   color: #999;
+}
+
+button:disabled:hover {
+   background-color: #ccc;
+   opacity: 1;
+   color: #999;
+}
+
+/* ------------------------header--------------- */
+
+header {
+   height: 62px;
+   display: flex;
+   justify-content: space-between;
+   padding: 0 80px;
+}
+
+.left_logo_search_header_block {
+   display: flex;
+   align-items: center;
+}
+
+.left_logo_search_header_block a {
+   font-weight: 700;
+   font-size: 19px;
+   line-height: 34px;
+   display: flex;
+   align-items: center;
+   letter-spacing: 0.5px;
+   color: var(--primary);
+}
+
+.left_logo_search_header_block a span {
+   color: var(--secondary);
+   font-size: 28px;
+   animation: bounce 0.3s ease-in-out 5s;
+}
+
+.left_logo_search_header_block a span:hover {
+   cursor: default;
+}
+
+@keyframes bounce {
+   0% {
+      transform: translateY(0);
+   }
+
+   50% {
+      transform: translateY(-5px);
+   }
+
+   100% {
+      transform: translateY(0);
+   }
+}
+
+.center_nav_header_block {
+   height: 100%;
+}
+
+.center_nav_header_block ul {
+   display: flex;
+   height: 100%;
+   align-items: center;
+}
+
+.center_nav_header_block li a {
+   padding: 0 20px;
+   font-size: 14px;
+   color: var(--ct1);
+}
+
+.search-box {
+   display: flex;
+   align-items: center;
+}
+
+.search-box input {
+   padding: 10px;
+   border: none;
+   border-radius: 5px;
+   margin-right: 10px;
+}
+
+.search-box button {
+   background-color: #fff;
+   border: none;
+   border-radius: 5px;
+   padding: 10px;
+}
+
+/* --------------------------===>Register Block<===-------------------------- */
+
+.container {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   height: 500px;
+   width: 100%;
+   margin-top: 40px;
+}
+
+#formAccRegister {
+   width: 35%;
+}
+
+.fieldsCard {
+   width: 350px;
+   height: 300px;
+   padding: 19px;
+   border: 1px solid var(--ct2);
+   border-radius: 12px;
+   margin: 65px 20px;
+   background-color: rgba(255, 255, 255, 0.8);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+   align-items: center;
+}
+
+.fieldsCard h1 {
+   font-size: 36px;
+   font-weight: bold;
+   margin: 18px auto;
+   line-height: 34px;
+   align-items: center;
+   letter-spacing: 0.5px;
+   color: var(--primary-dark);
+   text-align: center;
+}
+
+.container .fieldsCard input {
+   height: 30px;
+   border: 1px solid var(--ct2);
+   border-radius: 4px;
+   margin-bottom: 10px;
+   width: 100%;
+}
+
+.container .fieldsCard label {
+   font-size: 18px;
+   font-weight: bold;
+   margin-bottom: 10px;
+   display: block;
+}
+
+
+.container .fieldsCard input:focus {
+   outline: none;
+   border-color: var(--primary);
+}
+
+.fieldsCard button {
+   background-color: var(--primary);
+   color: #fff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease-in-out;
+}
+
+.fieldsCard button:hover {
+   background-color: #fff;
+   color: var(--primary);
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+   transform: translateY(-2px);
+   cursor: pointer;
+}
+
+/* --------------------------===>Цитата<===-------------------------- */
+
+.quoteBlock {
+   width: 35%;
+   padding: 50px 30px;
+   color: var(--ct1);
+   font-size: 45px;
+   font-weight: bold;
+   text-align: center;
+}
+
+.quoteBlock blockquote {
+   margin: 0;
+}
+
+.quoteBlock blockquote::before {
+   content: "\201C";
+   font-size: 60px;
+   color: var(--primary);
+   margin-right: 20px;
+}
+
+.quoteBlock blockquote::after {
+   content: "\201D";
+   font-size: 60px;
+   color: var(--primary);
+   margin-left: 10px;
+}
+
+.quoteBlock cite {
+   display: block;
+   margin-top: 20px;
+   font-size: 25px;
+   font-style: italic;
+}
+
+/* --------------------------===>Нет или есть аккаунт?<===-------------------------- */
+.auth-info {
+   font-size: 14px;
+   margin: 20px 0;
+   text-align: center;
+}
+
+.auth-link {
+   color: #0077c0;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.auth-link:hover {
+   text-decoration: underline;
+}

@@ -10,21 +10,24 @@ const $categoryAddBtn = document.querySelector('#categoryAddBtn')
 const $categorySelect = document.querySelector('#categorySelect')
 const $formCategoryCreate = document.querySelector('#formCategoryCreate')
 
+const $signOutBtn = document.querySelector('.signOutBtn')
+
 const $categoryFilter = document.querySelector('#category-filter')
 
 const nowTime = new Date();
 let notesArray = []
 
+const BASE_URL = 'https://mytodo-01-default-rtdb.asia-southeast1.firebasedatabase.app'
+
 const $notes = document.querySelectorAll('.todoCard')
 
 // ----Загрузка заметок при обновлении сайта
 window.addEventListener('load', () => {
-   const todos = getTodos()
+   getTodosRequest()
+
    const category = getСategory()
 
-   todos.reverse().forEach(todo => {
-      $cardsContainer.insertAdjacentHTML('beforeend', cardTemplate(todo))
-   })
+
 
    category.reverse().forEach(category => {
       $categorySelect.insertAdjacentHTML('afterbegin', `<option value="${category.id}">${category.title}</option>`)
@@ -78,7 +81,6 @@ function cardTemplate(todo) {
       editedAt,
       category,
    } = todo
-
    const categories = getСategory()
 
    const findCategory = categories.find(ctg => ctg.id === +category)
@@ -86,7 +88,7 @@ function cardTemplate(todo) {
    return `
    <div class="todoCard my-scrollbar ${completed ? 'completed' : ''}" data-categoryId="${category}">
       <div class="titleTodoCard">
-      <label for="todo1" class="todoTitle"><input type="radio" id="todoRadioBtn" onclick="completeTodo(${id})" name="todoRadioBtn"
+      <label for="todo1" class="todoTitle"><input type="radio" id="todoRadioBtn" onclick="completeTodo('${id}', ${completed})" name="todoRadioBtn"
       class="todoCheckbox">${title}</label>
 
       <div class="timeBlock">
@@ -103,8 +105,8 @@ function cardTemplate(todo) {
 
       </div>
       <div class="cardIcons">
-      <button class="editBtn" onclick="editTodo(${id})"><i class="fa fa-pencil"></i></button>
-      <button class="deleteBtn" onclick="deleteTodo(${id})"><i class="fa fa-trash"></i></button>
+      <button class="editBtn" onclick="editTodo('${id}', '${title}', '${description}')"><i class="fa fa-pencil"></i></button>
+      <button class="deleteBtn" onclick="deleteTodo('${id}')"><i class="fa fa-trash"></i></button>
       
       </div>
    </div>
@@ -112,25 +114,52 @@ function cardTemplate(todo) {
 }
 
 // --------------Шаблок заметок lS--------------
-function createTodo({ title, description, category }) {
-   const currentTodos = getTodos()
+async function createTodo({ title, description, category }) {
+   try {
+      const todo = {
+         title: title.trim() || "Untitled",
+         description: description.trim() || "No description",
+         timeCreated: timeNotesCreated(),
+         editedAt: null,
+         completed: false,
+         category
+      }
 
-   const todo = {
-      id: generateId(),
-      title: title.trim() || "Untitled",
-      description: description.trim() || "No description",
-      timeCreated: timeNotesCreated(),
-      editedAt: null,
-      completed: false,
-      category
+      await fetch(`${BASE_URL}/todos.json`, {
+         method: 'POST',
+         body: JSON.stringify(todo),
+      })
+
+      resetFields()
+      $cardsContainer.insertAdjacentHTML('afterbegin', cardTemplate(todo))
+   } catch (e) {
+      console.error(e)
    }
 
-   setTodos([...currentTodos, todo])
-
-   $cardsContainer.insertAdjacentHTML('afterbegin', cardTemplate(todo))
-
-   resetFields()
 }
+
+async function getTodosRequest() {
+   try {
+      const response = await fetch(`${BASE_URL}/todos.json`)
+
+      const todos = await response.json()
+
+
+      const todosArray = Object.entries(todos).map(([id, val]) => {
+         return {
+            id,
+            ...val
+         }
+      })
+      const template = todosArray.reverse().reduce((acc, todo) => acc + cardTemplate(todo), '')
+
+      $cardsContainer.innerHTML = template
+
+   } catch (e) {
+      console.error(e)
+   }
+}
+
 
 // ---------- Категории в ls-----------
 function createCategory({ title }) {
@@ -147,50 +176,67 @@ function createCategory({ title }) {
    resetCategoryFields()
    reloadPage()
 }
-
+// -------------Функция для получение todos из lS
+function getTodos(todos) {
+   return JSON.parse(localStorage.getItem('todos')) || []
+}
 
 
 // Завершенние заметки
-function completeTodo(id) {
+async function completeTodo(id, completed) {
 
-   const updatedTodos = getTodos().map(todo => {
-      if (todo.id === id) {
-         todo.completed = !todo.completed
-      }
-      return todo
-   })
+   try {
+      await fetch(`${BASE_URL}/todos/${id}.json`, {
+         method: 'PATCH',
+         body: JSON.stringify({
+            completed: !completed,
+         })
+      })
 
-   setTodos(updatedTodos)
+      await getTodosRequest()
+   } catch (e) {
+      console.error(e)
+   }
 
-   reloadPage()
 }
 
 // Удаление заметки
-function deleteTodo(id) {
-   const confirmDelete = confirm('Do you confirm that you want to delete the note?')
+async function deleteTodo(id) {
+   try {
+      const confirmDelete = confirm('Do you confirm that you want to delete the note?')
+      if (!confirmDelete) return
 
-   if (!confirmDelete) return
+      await fetch(`${BASE_URL}/todos/${id}.json`, {
+         method: 'DELETE'
+      })
 
-   const updatedTodos = getTodos().filter(todo => todo.id !== id)
+      await getTodosRequest()
 
-   setTodos(updatedTodos)
-   reloadPage()
+   } catch (e) {
+      console.error(e)
+   }
 }
 
-function editTodo(id) {
-   const updatedTodos = getTodos().map(todo => {
-      if (todo.id === id) {
-         todo.title = prompt('Write your new title:', todo.title) || todo.title
-         todo.description = prompt('Write your new description:', todo.description) || todo.description
-         todo.editedAt = timeNotesCreated()
-      }
 
-      return todo
-   })
+async function editTodo(id, title, description) {
+   try {
+      await fetch(`${BASE_URL}/todos/${id}.json`, {
+         method: 'PATCH',
+         body: JSON.stringify({
+            title: prompt('Write your new title:', title) || title,
+            description: prompt('Write your new description:', description) || description,
+            editedAt: timeNotesCreated(),
+         })
+      })
 
-   setTodos(updatedTodos)
-   reloadPage()
+      await getTodosRequest()
+   } catch (e) {
+      console.error(e)
+   }
+
 }
+
+
 
 // -------------Время создание заметки-------------
 function timeNotesCreated() {
@@ -236,10 +282,6 @@ function getCategoryTitleById(id) {
    return "Untitled"
 }
 
-// -------------Функция для получение todos из lS
-function getTodos() {
-   return JSON.parse(localStorage.getItem('todos')) || []
-}
 // -------------Функция сохранения заметки в localStorage----------
 function setTodos(todos) {
    localStorage.setItem('todos', JSON.stringify(todos))
@@ -254,7 +296,7 @@ function setСategory(category) {
 }
 
 
-
+// --------------Radio Input---------------
 // $todoRadioBtn.addEventListener('click', () => {
 //    if (radioBtn.checked) {
 //       radioBtn.checked = false
@@ -267,3 +309,21 @@ function setСategory(category) {
 function reloadPage() {
    window.location.reload()
 }
+
+
+/* --------------------------===>Check auth<===-------------------------- */
+
+window.addEventListener('DOMContentLoaded', () => {
+   const localId = localStorage.getItem('localId')
+
+   if (!localId) {
+      window.open('../html/signIn.html', '_self')
+   }
+})
+
+/* --------------------------===>Sign out btn function<===-------------------------- */
+$signOutBtn.addEventListener('click', () => {
+   alert('Всё робит')
+   localStorage.removeItem('localId')
+   window.open('../html/signIn.html', '_self')
+})
